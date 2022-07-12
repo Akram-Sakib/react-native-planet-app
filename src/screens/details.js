@@ -9,6 +9,16 @@ import {
 } from "react-native";
 import PlanetHeaders from "../components/planet-header";
 import Text from "../components/text/text";
+import {
+  MercurySvg,
+  EarthSvg,
+  JupiterSvg,
+  MarsSvg,
+  NeptuneSvg,
+  SaturnSvg,
+  UranusSvg,
+  VenusSvg,
+} from "../svg";
 import { colors } from "../theme/colors";
 import { spacing } from "../theme/spacing";
 
@@ -36,8 +46,25 @@ export default function Details({ route }) {
   } = planet;
   console.log("Planet -->", planet);
 
-  const renderDetails = () => {
-    return <Text preset="h2">{name}</Text>;
+  const renderImage = (name) => {
+    switch (name) {
+      case "mercury":
+        return <MercurySvg />;
+      case "earth":
+        return <EarthSvg />;
+      case "jupiter":
+        return <JupiterSvg />;
+      case "mars":
+        return <MarsSvg />;
+      case "neptune":
+        return <NeptuneSvg />;
+      case "saturn":
+        return <SaturnSvg />;
+      case "uranus":
+        return <UranusSvg />;
+      case "venus":
+        return <VenusSvg />;
+    }
   };
 
   const onPressLink = () => {
@@ -48,6 +75,7 @@ export default function Details({ route }) {
     <SafeAreaView style={styles.container}>
       <PlanetHeaders backBtn={true} title="DETAILS" />
       <ScrollView>
+        <View style={styles.imageView}>{renderImage(name)}</View>
         <View style={styles.detailsView}>
           <Text preset="h1" style={styles.name}>
             {name}
@@ -71,6 +99,12 @@ export default function Details({ route }) {
 }
 
 const styles = StyleSheet.create({
+  imageView: {
+    marginTop: spacing[8],
+    padding: spacing[5],
+    alignItems: "center",
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
     backgroundColor: colors.black,
